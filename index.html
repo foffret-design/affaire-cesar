@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L'Affaire César — Le larsa du siècle</title>
+<title>L'Affaire Simon — Le faux héros du 06</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -14,15 +14,16 @@
   }
   .container { max-width: 900px; margin: 0 auto; padding: 20px; }
 
+  /* HERO */
   .hero {
     text-align: center;
     padding: 80px 20px 60px;
-    background: linear-gradient(180deg, #1a0000 0%, #0a0a0a 100%);
+    background: linear-gradient(180deg, #1a0f00 0%, #0a0a0a 100%);
     border-bottom: 1px solid #2a2a2a;
   }
   .hero .badge {
     display: inline-block;
-    background: #e24b4a;
+    background: #BA7517;
     color: white;
     padding: 6px 16px;
     border-radius: 4px;
@@ -41,8 +42,17 @@
     -webkit-text-fill-color: transparent;
     line-height: 1.1;
   }
-  .hero .subtitle { font-size: 22px; color: #aaa; margin-bottom: 32px; }
-  .hero .tags { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .hero .subtitle {
+    font-size: 22px;
+    color: #aaa;
+    margin-bottom: 32px;
+  }
+  .hero .tags {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
   .tag {
     background: rgba(255,255,255,0.05);
     border: 1px solid #333;
@@ -51,28 +61,7 @@
     font-size: 13px;
   }
 
-  .part-header {
-    text-align: center;
-    padding: 80px 20px 40px;
-    background: linear-gradient(180deg, #0a0a0a 0%, #1a0505 50%, #0a0a0a 100%);
-    margin: 40px 0;
-    border-top: 1px solid #2a2a2a;
-    border-bottom: 1px solid #2a2a2a;
-  }
-  .part-header .part-num {
-    font-size: 13px;
-    color: #e24b4a;
-    letter-spacing: 4px;
-    font-weight: 600;
-    margin-bottom: 16px;
-  }
-  .part-header h2 {
-    font-size: 48px;
-    margin-bottom: 12px;
-    color: #fff;
-  }
-  .part-header .part-sub { font-size: 18px; color: #aaa; }
-
+  /* NAV */
   nav {
     position: sticky;
     top: 0;
@@ -89,16 +78,22 @@
     justify-content: center;
     flex-wrap: wrap;
   }
-  nav a { color: #aaa; text-decoration: none; font-size: 14px; }
-  nav a:hover { color: #e24b4a; }
+  nav a { color: #aaa; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+  nav a:hover { color: #BA7517; }
 
+  /* SECTIONS */
   section { padding: 50px 0; }
-  h2 { font-size: 32px; margin-bottom: 24px; color: #fff; }
-  h2 .icon { color: #e24b4a; margin-right: 8px; }
-  h3 { font-size: 22px; margin-bottom: 16px; color: #fff; }
-  p { margin-bottom: 16px; color: #ccc; }
+  h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  h2 .icon { color: #BA7517; margin-right: 8px; }
+  p { margin-bottom: 14px; color: #ccc; }
   strong { color: #fff; font-weight: 600; }
+  em { color: #ddd; }
 
+  /* CARDS */
   .card {
     background: #141414;
     border: 1px solid #2a2a2a;
@@ -106,120 +101,208 @@
     padding: 24px;
     margin-bottom: 20px;
   }
+  .card.danger { border: 2px solid #A32D2D; }
+  .card.amber {
+    background: linear-gradient(135deg, rgba(186,117,23,0.08), rgba(186,117,23,0.02));
+    border: 1px solid #BA7517;
+  }
+  .card.mael {
+    background: linear-gradient(135deg, rgba(127,119,221,0.15), rgba(127,119,221,0.03));
+    border: 1.5px solid #534AB7;
+    padding: 28px;
+  }
+  .card.mael h2 { color: #AFA9EC; }
+  .card.mael p { color: #d4d0f5; }
+  .card.mael strong { color: #fff; }
 
+  /* QUOTE BOXES */
+  .quote-box {
+    background: rgba(186,117,23,0.1);
+    border-left: 3px solid #BA7517;
+    border-radius: 0 8px 8px 0;
+    padding: 16px;
+    margin: 16px 0;
+    font-style: italic;
+    color: #f5e6c8;
+  }
+  .quote-box .sub {
+    font-size: 13px;
+    color: #BA7517;
+    margin-top: 8px;
+    display: block;
+  }
+
+  .alert {
+    background: rgba(226,75,74,0.12);
+    border-left: 4px solid #A32D2D;
+    padding: 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 18px 0;
+  }
+  .alert .label {
+    font-size: 11px;
+    color: #F09595;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .alert p { color: #f7c1c1; margin-bottom: 6px; }
+  .alert .note {
+    font-size: 13px;
+    color: #F09595;
+    font-style: italic;
+    margin-top: 6px;
+  }
+
+  /* PROBLEM LIST */
+  .problem-list {
+    background: rgba(226,75,74,0.1);
+    border: 1.5px solid #A32D2D;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+  .problem-list .title {
+    font-size: 11px;
+    color: #F09595;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .problem-list ol {
+    padding-left: 24px;
+    color: #f7c1c1;
+  }
+  .problem-list li {
+    padding: 6px 0;
+    line-height: 1.6;
+  }
+
+  /* CARD MAEL DETAILS */
+  .mael-stats {
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 14px;
+    margin-top: 16px;
+  }
+  .mael-stats .label {
+    font-size: 11px;
+    color: #AFA9EC;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .mael-stats p { color: #d4d0f5; line-height: 1.8; margin: 0; font-size: 14px; }
+
+  /* TWIST SECTION */
+  .twist {
+    background: linear-gradient(135deg, rgba(226,75,74,0.15), rgba(186,117,23,0.1));
+    border: 1.5px solid #A32D2D;
+    border-radius: 12px;
+    padding: 28px;
+    margin: 24px 0;
+  }
+  .twist .title-mini {
+    text-align: center;
+    font-size: 12px;
+    color: #F09595;
+    letter-spacing: 4px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .twist h2 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+  .twist p { color: #f7c1c1; }
+  .tour {
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 18px 0;
+  }
+  .tour .label {
+    font-size: 12px;
+    color: #F09595;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .tour p {
+    line-height: 1.9;
+    margin: 0;
+    color: #f7c1c1;
+  }
+  .twist-foot {
+    text-align: center;
+    color: #F09595;
+    font-style: italic;
+    font-size: 15px;
+    margin-top: 14px;
+  }
+
+  /* MAP GRID */
+  .map-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+    margin: 20px 0;
+  }
+  .city {
+    background: rgba(226,75,74,0.1);
+    border: 1px solid #A32D2D;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .city .name { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .city .pct { font-size: 11px; color: #F09595; }
+  .city.monaco {
+    background: rgba(186,117,23,0.1);
+    border-color: #BA7517;
+  }
+  .city.monaco .pct { color: #EF9F27; }
+
+  /* TESTIMONIALS */
+  .testimonial {
+    border-left: 3px solid #534AB7;
+    padding: 8px 0 8px 16px;
+    margin-bottom: 16px;
+  }
+  .testimonial.coral { border-color: #D85A30; }
+  .testimonial.teal { border-color: #0F6E56; }
+  .testimonial p { font-style: italic; margin-bottom: 6px; color: #ddd; }
+  .testimonial .author { font-size: 13px; color: #888; }
+
+  /* STATS */
   .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 16px;
-    margin: 24px 0;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
   }
   .stat {
     background: #141414;
     border: 1px solid #2a2a2a;
     border-radius: 12px;
-    padding: 20px;
+    padding: 16px;
     text-align: center;
   }
-  .stat .label { font-size: 13px; color: #888; margin-bottom: 8px; }
-  .stat .value { font-size: 32px; font-weight: 700; color: #fff; }
-  .stat.danger .value { color: #e24b4a; }
+  .stat .label { font-size: 12px; color: #888; margin-bottom: 6px; }
+  .stat .value { font-size: 26px; font-weight: 700; color: #fff; }
 
-  .timeline-v1 { margin: 24px 0; }
-  .timeline-v1-row {
-    display: flex;
-    gap: 16px;
-    padding: 12px 0;
-    border-bottom: 1px solid #1a1a1a;
-  }
-  .timeline-v1-row:last-child { border-bottom: none; }
-  .timeline-v1-time { color: #e24b4a; min-width: 70px; font-weight: 600; font-size: 14px; }
-  .timeline-v1-event { color: #ddd; font-size: 15px; }
-
-  .timeline {
-    background: #0d0d0d;
-    border: 1px solid #2a2a2a;
-    border-radius: 12px;
+  /* MORALE */
+  .morale {
+    background: rgba(127,119,221,0.1);
+    border-left: 4px solid #534AB7;
     padding: 24px;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-  }
-  .timeline-row { display: flex; gap: 16px; padding: 8px 0; border-bottom: 1px solid #1a1a1a; }
-  .timeline-row:last-child { border-bottom: none; }
-  .timeline-time { color: #888; min-width: 80px; }
-  .timeline-event { color: #ddd; }
-  .timeline-event.chaos { color: #e24b4a; font-weight: 700; }
-
-  .grid-014 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
+    border-radius: 0 12px 12px 0;
     margin: 24px 0;
   }
-  .agent { border-radius: 12px; padding: 16px; border: 1px solid; }
-  .agent .num { font-size: 11px; letter-spacing: 2px; margin-bottom: 6px; font-weight: 600; }
-  .agent .name { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-  .agent .desc { font-size: 13px; line-height: 1.5; }
-  .agent.purple { background: rgba(127,119,221,0.1); border-color: #534AB7; }
-  .agent.purple .name, .agent.purple .num { color: #AFA9EC; }
-  .agent.purple .desc { color: #CECBF6; }
-  .agent.coral { background: rgba(216,90,48,0.1); border-color: #D85A30; }
-  .agent.coral .name, .agent.coral .num { color: #F0997B; }
-  .agent.coral .desc { color: #F5C4B3; }
-  .agent.teal { background: rgba(29,158,117,0.1); border-color: #0F6E56; }
-  .agent.teal .name, .agent.teal .num { color: #5DCAA5; }
-  .agent.teal .desc { color: #9FE1CB; }
-  .agent.pink { background: rgba(212,83,126,0.1); border-color: #D4537E; }
-  .agent.pink .name, .agent.pink .num { color: #ED93B1; }
-  .agent.pink .desc { color: #F4C0D1; }
-  .agent.amber { background: rgba(186,117,23,0.1); border-color: #BA7517; }
-  .agent.amber .name, .agent.amber .num { color: #EF9F27; }
-  .agent.amber .desc { color: #FAC775; }
-  .agent.blue { background: rgba(55,138,221,0.1); border-color: #185FA5; }
-  .agent.blue .name, .agent.blue .num { color: #85B7EB; }
-  .agent.blue .desc { color: #B5D4F4; }
-  .agent.red { background: rgba(226,75,74,0.1); border-color: #A32D2D; }
-  .agent.red .name, .agent.red .num { color: #F09595; }
-  .agent.red .desc { color: #F7C1C1; }
-  .agent.mystery { background: rgba(255,255,255,0.02); border: 1px dashed #444; }
-  .agent.mystery .name, .agent.mystery .num { color: #aaa; }
-  .agent.mystery .desc { color: #888; }
+  .morale h2 { color: #AFA9EC; margin-bottom: 12px; }
+  .morale p { color: #d4d0f5; line-height: 1.7; }
 
-  .quote { border-left: 3px solid #534AB7; padding: 8px 0 8px 16px; margin-bottom: 16px; }
-  .quote.coral { border-color: #D85A30; }
-  .quote.teal { border-color: #0F6E56; }
-  .quote.amber { border-color: #BA7517; }
-  .quote p { font-style: italic; margin-bottom: 6px; }
-  .quote .author { font-size: 13px; color: #888; }
-
-  .alert {
-    background: rgba(226,75,74,0.1);
-    border-left: 4px solid #A32D2D;
-    padding: 20px;
-    border-radius: 0 8px 8px 0;
-    margin: 24px 0;
-  }
-  .alert h3 { color: #F09595; }
-  .alert p { color: #F7C1C1; }
-
-  .communique {
-    background: rgba(226,75,74,0.05);
-    border: 1px solid #A32D2D;
-    padding: 24px;
-    border-radius: 12px;
-    text-align: center;
-    margin: 24px 0;
-  }
-  .communique p { font-style: italic; font-size: 18px; color: #F7C1C1; margin-bottom: 12px; }
-  .communique .source { font-size: 12px; color: #888; }
-
-  .transition {
-    text-align: center;
-    padding: 40px 20px;
-    color: #888;
-    font-style: italic;
-    font-size: 16px;
-  }
-
+  /* FOOTER */
   footer {
     text-align: center;
     padding: 40px 20px;
@@ -231,249 +314,238 @@
   @media (max-width: 600px) {
     .hero h1 { font-size: 40px; }
     .hero .subtitle { font-size: 18px; }
-    h2 { font-size: 24px; }
-    .part-header h2 { font-size: 32px; }
+    h2 { font-size: 22px; }
   }
 </style>
 </head>
 <body>
 
+<!-- HERO -->
 <div class="hero">
-  <div class="badge">⚠ L'histoire vraie</div>
-  <h1>L'AFFAIRE CÉSAR</h1>
-  <p class="subtitle">Le larsa du siècle — récit en deux parties</p>
+  <div class="badge">⚠ Saga du 06</div>
+  <h1>L'AFFAIRE SIMON</h1>
+  <p class="subtitle">Le faux héros qui a calmé personne</p>
   <div class="tags">
-    <span class="tag">🔥 EXCLU</span>
-    <span class="tag">⚡ CHAUD</span>
-    <span class="tag">👁 47 TÉMOINS</span>
+    <span class="tag">📡 EN BOUCLE</span>
+    <span class="tag">👑 MAËL CONFIRMÉ</span>
+    <span class="tag">🦸 FAUX HÉROS</span>
   </div>
 </div>
 
+<!-- NAV -->
 <nav>
   <ul>
-    <li><a href="#partie1">Partie 1 · Fait divers</a></li>
-    <li><a href="#partie2">Partie 2 · Révélation choc</a></li>
+    <li><a href="#acte1">Acte 1</a></li>
+    <li><a href="#acte2">Acte 2</a></li>
+    <li><a href="#mael">Maël</a></li>
+    <li><a href="#acte3">Acte 3</a></li>
+    <li><a href="#acte4">Acte 4 · La vidéo</a></li>
+    <li><a href="#twist">Le twist</a></li>
   </ul>
 </nav>
 
-<!-- PARTIE 1 -->
-<div class="part-header" id="partie1">
-  <div class="part-num">— PARTIE 1 —</div>
-  <h2>Fait divers du siècle</h2>
-  <p class="part-sub">César se fait larsa par une 014</p>
-</div>
-
 <div class="container">
 
-  <section>
-    <h2><span class="icon">📰</span>Les faits</h2>
+  <!-- ACTE 1 -->
+  <section id="acte1">
+    <h2><span class="icon">📖</span>Acte 1 — L'insulte de Lila</h2>
     <div class="card">
-      <p>Mardi soir, sur le parking du Carrefour. <strong>César</strong>, la légende du quartier, celui qui a jamais perdu un 1v1 depuis 2019, sortait tranquille de chez le coiffeur fresh.</p>
-      <p>C'est là qu'une <strong>014</strong> a débarqué de nulle part. Personne s'y attendait. César non plus.</p>
+      <p>Tout commence un mardi. Lila balance une vanne sur le père de <strong>Sharko</strong>. Elle pensait que ça allait passer.</p>
+      <p style="font-style: italic; color: #888;">Le quartier retient son souffle. On ne parle PAS du père de Sharko. C'est dans la constitution non-écrite du 06.</p>
     </div>
   </section>
 
+  <!-- ACTE 2 -->
+  <section id="acte2">
+    <h2><span class="icon">🔥</span>Acte 2 — Sharko des Moulins entre en scène</h2>
+    <div class="card">
+      <p><strong>Sharko, fierté des Moulins</strong>, apprend l'info en 4 minutes. Il pose son verre. Il met sa veste. Il sort.</p>
+      <p>Il met un coup de pression à Lila. Pas violent, pas brutal — juste <strong>le regard.</strong> Le regard qui fait que tu commences à réviser ta vie depuis la maternelle.</p>
+      <p>L'affaire est <strong>CLOSE</strong>. En 4 minutes. Net. Tout le quartier passe à autre chose.</p>
+    </div>
+  </section>
+
+  <!-- INTERMÈDE MAËL -->
+  <section id="mael">
+    <div class="card mael">
+      <h2>👑 Intermède — Maël, le roi sans royaume</h2>
+      <p>Pendant que toute cette histoire se déroule, <strong>Maël</strong> sirote un thé à la menthe sur une terrasse à <strong>Marrakech</strong>. Il ne savait rien. Il ne saura jamais.</p>
+      <p>Maël n'a pas besoin d'être informé. Maël <strong>EST</strong> l'information. Sa simple existence calme les tempêtes.</p>
+      <p style="font-style: italic;">Au moment exact où Sharko règle l'affaire, Maël aurait souri sans raison à un chat. Coïncidence ? Personne ne le pense.</p>
+
+      <div class="mael-stats">
+        <div class="label">📜 CARTE DU SAGE</div>
+        <p>
+          <strong>Nom :</strong> Maël<br>
+          <strong>Titre :</strong> Le sage de Marrakech<br>
+          <strong>Implication directe :</strong> Aucune<br>
+          <strong>Influence spirituelle :</strong> Totale<br>
+          <strong>Statut :</strong> Au-dessus de tout
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTE 3 -->
+  <section id="acte3">
+    <h2><span class="icon">🦸</span>Acte 3 — Simon enfile sa cape</h2>
+    <div class="card">
+      <p>L'affaire est terminée depuis 47 minutes. Sharko mange un sandwich. Maël contemple un coucher de soleil. Lila est passée à autre chose.</p>
+      <p>C'est là que <strong>Simon</strong> se lève. Il prend une grande inspiration. Il regarde le ciel. <strong>Il a une mission.</strong></p>
+
+      <div class="quote-box">
+        "Les gars... je vais arranger ça. Je vais faire une vidéo d'excuses à Sharko et à Maël. <strong style="color: #fff;">À la place de Lila.</strong> Pour calmer les choses. Quelqu'un doit le faire. Ce sera moi."
+      </div>
+
+      <div class="problem-list">
+        <div class="title">⚠ PROBLÈMES (par ordre d'apparition)</div>
+        <ol>
+          <li>Personne lui a demandé d'arranger quoi que ce soit.</li>
+          <li>L'affaire est <strong>déjà arrangée</strong> depuis 47 minutes.</li>
+          <li>Sharko sait pas qui est Simon.</li>
+          <li>Maël sait pas qui est Simon.</li>
+          <li><strong>Lila sait pas qui est Simon.</strong> Quand on lui a montré sa photo elle a dit : "<em>c'est le frère de qui lui ?</em>"</li>
+          <li>Simon parle "à la place de Lila" comme s'ils étaient potes. Ils se sont jamais adressé la parole.</li>
+        </ol>
+      </div>
+
+      <p>Mais Simon, lui, se voit déjà <strong>en ambassadeur de paix du 06</strong>. Il imagine déjà Sharko qui lui serre la main. Maël qui lui dit "merci frère". Le quartier qui scande son nom. <strong>Il prend son téléphone.</strong></p>
+    </div>
+  </section>
+
+  <!-- ACTE 4 -->
+  <section id="acte4">
+    <h2><span class="icon">🎥</span>Acte 4 — La vidéo</h2>
+    <div class="card danger">
+      <p>Simon rentre chez lui. Il habite encore avec sa mère. Sa chambre, c'est la même depuis qu'il a 9 ans. Y'a toujours le poster de Cristiano Ronaldo au mur. Mal scotché.</p>
+
+      <p>Il prend la ring light de sa petite sœur sans demander. Elle a 11 ans. Elle l'utilise pour ses tutos slime. Elle saura plus tard que son frère l'a empruntée pour faire LA vidéo. <strong>Elle changera de nom de famille à 18 ans.</strong></p>
+
+      <p>Il met sa capuche. Pas par style — pour cacher qu'il a encore son acné <strong>à 22 ans</strong>. Il s'entraîne devant le miroir. Il prend sa voix grave. Celle qu'il utilise jamais. Celle qui sonne fake immédiatement.</p>
+
+      <p>Il appuie sur enregistrer.</p>
+
+      <div class="alert">
+        <div class="label">💬 MINUTE 1 — L'OUVERTURE</div>
+        <p style="font-style: italic;">"Sharko... Maël... mes frères... aujourd'hui je prends mes responsabilités. Lila n'a pas le courage de le faire, alors je vais le faire pour elle."</p>
+        <p class="note">(Lila est en train d'acheter un boba à Antibes. Elle pense à rien.)</p>
+        <p class="note">(Sharko est dans sa cuisine. Il fait des oeufs.)</p>
+      </div>
+
+      <p>À <strong>la minute 2</strong>, Simon dit "<em>en tant que représentant de la jeunesse du 06</em>". <strong>Personne l'a élu. Aucun mandat. Aucune légitimité.</strong></p>
+
+      <p>À <strong>la minute 4</strong>, Simon pleure. Une vraie larme. Sa mère toque à la porte : "Simon t'es là ? J'ai fait des coquillettes." Il fait semblant qu'il dort. <strong>Il a 22 ans.</strong></p>
+
+      <p>À <strong>la minute 6</strong>, il dit "<em>Sharko, Maël, je sais qu'on a eu nos différends</em>". <strong>Ils se connaissent pas. Y'a JAMAIS eu de différend. Y'a jamais eu de RIEN.</strong></p>
+
+      <p>À <strong>la minute 8</strong>, il fait le geste de la main sur le cœur. Il dit "<em>par respect pour vos pères</em>". Pluriel. <strong>Il connaît même pas le sien.</strong> Personne a vu son père depuis 2014.</p>
+
+      <div class="alert">
+        <div class="label">💣 MINUTE 9'14 — IL DIT LE MOT</div>
+        <p>En voulant "s'excuser à la place de Lila", il prononce <strong>"le père de Sharko"</strong>. Dans une vidéo. Filmée. Avec la date. Et l'heure.</p>
+        <p class="note">Le seul mec qui pensait calmer l'affaire vient de la rallumer tout seul, depuis sa chambre, avec la ring light de sa petite sœur.</p>
+      </div>
+
+      <p>À <strong>la minute 11</strong>, il propose un "<em>sommet de réconciliation entre les quartiers</em>". <strong>Il vit dans un pavillon avec piscine et un labrador qui s'appelle Plume.</strong></p>
+
+      <p>À <strong>la minute 13</strong>, il regarde la cam dans les yeux. Il dit : "<em>Sharko, Maël... la paix soit avec vous. Et Lila... je te pardonne au nom du quartier.</em>"</p>
+
+      <p style="font-style: italic; color: #888; font-size: 14px;">Important : aucun quartier ne l'a chargé de pardonner qui que ce soit. Ce mandat n'existe pas. Il vient de l'inventer.</p>
+
+      <p>Il termine en disant : "<em>merci de m'avoir fait confiance pour gérer ça. Je rends à Sharko, Maël et Lila leur dignité.</em>" <strong>Personne lui a fait confiance. Personne avait perdu sa dignité. Sauf lui. Là. En direct.</strong></p>
+
+      <p>Il va manger ses coquillettes. Sa mère lui demande s'il a passé une bonne journée. Il répond <strong>"j'ai sauvé le 06 maman"</strong>. Sa mère sourit en hochant la tête. Elle sait pas. Personne sait encore. <strong>Mais ça arrive.</strong></p>
+    </div>
+  </section>
+
+  <!-- TWIST -->
+  <section id="twist">
+    <div class="twist">
+      <div class="title-mini">— LE TWIST —</div>
+      <h2>Maël et Sharko ont fait tourner la vidéo</h2>
+      <p>Sharko reçoit la vidéo le lendemain. Il regarde 30 secondes. Il sourit. Il l'envoie à Maël.</p>
+      <p>Maël regarde depuis Marrakech. Il rigole pendant 11 minutes d'affilée. <strong>Il décide que cette vidéo doit être vue.</strong> Par TOUT le monde.</p>
+
+      <div class="tour">
+        <div class="label">🗺️ LA TOURNÉE DE LA VIDÉO</div>
+        <p>
+          <strong>Étape 1 :</strong> Sharko l'envoie aux Moulins entiers<br>
+          <strong>Étape 2 :</strong> Maël la balance dans le groupe famille<br>
+          <strong>Étape 3 :</strong> Les Moulins l'envoient à Antibes<br>
+          <strong>Étape 4 :</strong> Antibes l'envoie à Cannes<br>
+          <strong>Étape 5 :</strong> Cannes l'envoie à Nice<br>
+          <strong>Étape 6 :</strong> Nice l'envoie à Menton<br>
+          <strong>Étape 7 :</strong> Menton l'envoie même à Monaco<br>
+          <strong>Étape 8 :</strong> Grasse la reçoit en boucle pendant 3 jours
+        </p>
+      </div>
+
+      <p class="twist-foot">Le département entier a vu Simon pleurer dans sa chambre.</p>
+    </div>
+  </section>
+
+  <!-- CARTE 06 -->
   <section>
-    <h2><span class="icon">📊</span>Les premiers chiffres</h2>
+    <h2><span class="icon">📍</span>Carte du 06 — Propagation</h2>
+    <div class="map-grid">
+      <div class="city"><div class="name">Les Moulins</div><div class="pct">Origine · 100%</div></div>
+      <div class="city"><div class="name">Antibes</div><div class="pct">Vu · 98%</div></div>
+      <div class="city"><div class="name">Cannes</div><div class="pct">Vu · 97%</div></div>
+      <div class="city"><div class="name">Nice</div><div class="pct">Vu · 96%</div></div>
+      <div class="city"><div class="name">Vence</div><div class="pct">Vu · 91%</div></div>
+      <div class="city"><div class="name">Menton</div><div class="pct">Vu · 89%</div></div>
+      <div class="city"><div class="name">Grasse</div><div class="pct">Vu · 94%</div></div>
+      <div class="city monaco"><div class="name">Monaco</div><div class="pct">Vu · 73% (les riches)</div></div>
+    </div>
+  </section>
+
+  <!-- TEMOIGNAGES -->
+  <section>
+    <h2><span class="icon">🎤</span>Témoignages du 06</h2>
+    <div class="card">
+      <div class="testimonial coral">
+        <p>"Wallah à Antibes même les vieux la regardaient. Ma grand-mère elle l'a montrée à son médecin."</p>
+        <div class="author">— Yanis, 22 ans, Antibes</div>
+      </div>
+      <div class="testimonial">
+        <p>"À Nice on a fait une projection au parc. 200 personnes. On a ri pendant 14 minutes. C'était sacré."</p>
+        <div class="author">— Sami, organisateur de la projection</div>
+      </div>
+      <div class="testimonial teal">
+        <p>"Même à Monaco on l'a vue. Y'a un mec qui l'a montrée dans un yacht. Le 06 c'est uni."</p>
+        <div class="author">— Source anonyme, Port Hercule</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section>
+    <h2><span class="icon">📊</span>Statistiques officielles</h2>
     <div class="stats-grid">
-      <div class="stat"><div class="label">Témoins</div><div class="value">47</div></div>
-      <div class="stat"><div class="label">Snaps postés</div><div class="value">312</div></div>
-      <div class="stat"><div class="label">Niveau de hess</div><div class="value">9.8/10</div></div>
-      <div class="stat danger"><div class="label">Réputation</div><div class="value">RIP</div></div>
+      <div class="stat"><div class="label">Habitants du 06</div><div class="value">1,1M</div></div>
+      <div class="stat"><div class="label">Ont vu la vidéo</div><div class="value">1,1M</div></div>
+      <div class="stat"><div class="label">Mandat de Simon</div><div class="value">aucun</div></div>
+      <div class="stat"><div class="label">Lila pense à Simon</div><div class="value">jamais</div></div>
+      <div class="stat"><div class="label">Cote Maël</div><div class="value">+400%</div></div>
+      <div class="stat"><div class="label">Cote Sharko</div><div class="value">+350%</div></div>
     </div>
   </section>
 
+  <!-- MORALE -->
   <section>
-    <h2><span class="icon">🎤</span>Premiers témoignages</h2>
-    <div class="card">
-      <div class="quote">
-        <p>"Frérot j'ai cru à un film. César il a rien vu venir, la 014 lui a fait un truc de fou. Wallah j'en dors plus."</p>
-        <div class="author">— Karim, témoin oculaire</div>
-      </div>
-      <div class="quote coral">
-        <p>"Moi je filmais avec mon iPhone 6, t'as vu la qualité, mais ça se voit que c'est larsa de niveau international."</p>
-        <div class="author">— Mehdi, vidéaste amateur</div>
-      </div>
-      <div class="quote teal">
-        <p>"César c'est mon cousin. Je veux pas en parler. (il pleure)"</p>
-        <div class="author">— Anonyme, famille proche</div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2><span class="icon">⏱️</span>Chronologie</h2>
-    <div class="timeline-v1">
-      <div class="timeline-v1-row">
-        <div class="timeline-v1-time">19h42</div>
-        <div class="timeline-v1-event">César sort de chez le coiffeur, dégradé propre, parfum fort</div>
-      </div>
-      <div class="timeline-v1-row">
-        <div class="timeline-v1-time">19h43</div>
-        <div class="timeline-v1-event">Il check son tel, il sent rien venir</div>
-      </div>
-      <div class="timeline-v1-row">
-        <div class="timeline-v1-time">19h44</div>
-        <div class="timeline-v1-event"><strong>La 014 arrive.</strong> Le quartier retient son souffle.</div>
-      </div>
-      <div class="timeline-v1-row">
-        <div class="timeline-v1-time">19h44</div>
-        <div class="timeline-v1-event">LARSA. Le monde s'arrête.</div>
-      </div>
-      <div class="timeline-v1-row">
-        <div class="timeline-v1-time">19h45</div>
-        <div class="timeline-v1-event">César est sur tous les status. Légende terminée.</div>
-      </div>
-    </div>
-  </section>
-
-  <div class="transition">
-    On pensait l'histoire terminée.<br>
-    On allait découvrir qu'elle commençait à peine...
-  </div>
-
-</div>
-
-<!-- PARTIE 2 -->
-<div class="part-header" id="partie2">
-  <div class="part-num">— PARTIE 2 —</div>
-  <h2>Révélation choc</h2>
-  <p class="part-sub">Y'avait pas UNE 014. Y'en avait SEPT.</p>
-</div>
-
-<div class="container">
-
-  <section>
-    <h2><span class="icon">👁️</span>Ce qu'on croyait savoir</h2>
-    <div class="card">
-      <p>Au début, on pensait que César s'était fait larsa par UNE 014. Une seule. Une affaire propre, nette, brutale.</p>
-      <p style="font-style: italic; color: #888;">On était loin de la vérité.</p>
-    </div>
-  </section>
-
-  <section>
-    <h2><span class="icon">🎥</span>La vidéo qui change tout</h2>
-    <div class="card">
-      <p>Mardi matin, un gosse de 11 ans qui jouait à Fortnite sur sa fenêtre a posté une vidéo sur TikTok. <strong>2,4 millions de vues en 4 heures.</strong></p>
-      <p>Sur les images, on voit clairement <strong>SEPT 014 différentes</strong> qui sortent de partout : de derrière la benne, du toit de la pharmacie, d'un scooter, et même UNE qui descendait d'un arbre.</p>
-      <div class="quote">
-        <p>"Au début j'ai cru que c'était un mode Battle Royale en vrai. J'ai compté sept 014. Je sais compter monsieur."</p>
-        <div class="author">— Le gosse, interview à BFM</div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2><span class="icon">🥷</span>Les 7 014 identifiées</h2>
-    <div class="grid-014">
-      <div class="agent purple">
-        <div class="num">014 #1</div>
-        <div class="name">La classique</div>
-        <div class="desc">Capuche, démarche tranquille. Celle qu'on a vue en premier.</div>
-      </div>
-      <div class="agent coral">
-        <div class="num">014 #2</div>
-        <div class="name">Celle de la benne</div>
-        <div class="desc">Aurait attendu 3 heures. Sentait pas bon mais déterminée.</div>
-      </div>
-      <div class="agent teal">
-        <div class="num">014 #3</div>
-        <div class="name">La sniper du toit</div>
-        <div class="desc">Sur la pharmacie. Personne sait comment elle est montée.</div>
-      </div>
-      <div class="agent pink">
-        <div class="num">014 #4</div>
-        <div class="name">La scootariste</div>
-        <div class="desc">TMAX sans plaque. Casque tinté. Pure intimidation.</div>
-      </div>
-      <div class="agent amber">
-        <div class="num">014 #5</div>
-        <div class="name">Tarzan</div>
-        <div class="desc">Descendue d'un arbre. Personne ne comprend. C'est validé.</div>
-      </div>
-      <div class="agent blue">
-        <div class="num">014 #6</div>
-        <div class="name">La taupe</div>
-        <div class="desc">Déguisée en livreur Uber Eats. Sac thermique vide.</div>
-      </div>
-      <div class="agent red">
-        <div class="num">014 #7</div>
-        <div class="name">LA PATRONNE</div>
-        <div class="desc">Bras croisés. N'a rien fait. Mais c'est elle qui dirige tout.</div>
-      </div>
-      <div class="agent mystery">
-        <div class="num">014 #?</div>
-        <div class="name">L'invisible ?</div>
-        <div class="desc">Certains parlent d'une 8ème. Rien de confirmé. Le mythe grandit.</div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2><span class="icon">🗺️</span>Reconstitution de l'embuscade</h2>
-    <p>César sort du coiffeur à 19h42. Il pose un pied, puis l'autre. <strong>C'est là que ça part en couilles.</strong></p>
-    <div class="timeline">
-      <div class="timeline-row"><div class="timeline-time">19:42:00</div><div class="timeline-event">César sort. Dégradé impeccable.</div></div>
-      <div class="timeline-row"><div class="timeline-time">19:42:03</div><div class="timeline-event">014 #1 apparaît en face. Classique.</div></div>
-      <div class="timeline-row"><div class="timeline-time">19:42:04</div><div class="timeline-event">César sourit. Il pense gérer.</div></div>
-      <div class="timeline-row"><div class="timeline-time">19:42:05</div><div class="timeline-event">014 #2 sort de la benne. César fronce.</div></div>
-      <div class="timeline-row"><div class="timeline-time">19:42:06</div><div class="timeline-event">014 #3 vise depuis le toit.</div></div>
-      <div class="timeline-row"><div class="timeline-time">19:42:07</div><div class="timeline-event">TMAX qui débarque (014 #4).</div></div>
-      <div class="timeline-row"><div class="timeline-time">19:42:08</div><div class="timeline-event chaos">014 #5 saute de l'arbre. CHAOS.</div></div>
-      <div class="timeline-row"><div class="timeline-time">19:42:09</div><div class="timeline-event">Le faux Uber Eats (014 #6) sort un truc.</div></div>
-      <div class="timeline-row"><div class="timeline-time">19:42:10</div><div class="timeline-event">La 014 #7 fait juste UN signe de la tête.</div></div>
-      <div class="timeline-row"><div class="timeline-time">19:42:11</div><div class="timeline-event chaos">LARSA INITIATED.</div></div>
-    </div>
-  </section>
-
-  <section>
-    <h2><span class="icon">🎤</span>Nouveaux témoignages</h2>
-    <div class="card">
-      <div class="quote">
-        <p>"Wallah au début j'ai compté 3 014. Après j'ai recompté, y'en avait 5. À la fin j'en voyais partout. Y'en avait peut-être 20 frérot."</p>
-        <div class="author">— Bilal, témoin (qui s'y connaît)</div>
-      </div>
-      <div class="quote teal">
-        <p>"Moi je vendais des chichas. J'ai tout vu. Les 014 elles étaient SYNCHRO. Comme un ballet. C'est de l'art."</p>
-        <div class="author">— Sofiane, commerçant</div>
-      </div>
-      <div class="quote amber">
-        <p>"J'avais dit en 2021 qu'un jour une coalition de 014 se formerait. Personne m'a cru. Aujourd'hui qui rigole."</p>
-        <div class="author">— Tonton Mamadou (il l'avait dit)</div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2><span class="icon">📊</span>Stats officielles du larsa</h2>
-    <div class="stats-grid">
-      <div class="stat"><div class="label">014 confirmées</div><div class="value">7</div></div>
-      <div class="stat"><div class="label">014 suspectées</div><div class="value">8-12</div></div>
-      <div class="stat"><div class="label">Durée du larsa</div><div class="value">11s</div></div>
-      <div class="stat danger"><div class="label">Chances de César</div><div class="value">0%</div></div>
-      <div class="stat"><div class="label">Vues TikTok</div><div class="value">2,4M</div></div>
-      <div class="stat"><div class="label">Place dans l'Histoire</div><div class="value">TOP 3</div></div>
-    </div>
-  </section>
-
-  <section>
-    <h2><span class="icon">📡</span>Communiqué officiel des 014</h2>
-    <div class="communique">
-      <p>"On était pas 7. On était une idée. On peut être 100 demain. Le quartier le sait maintenant."</p>
-      <div class="source">— Publié sur le statut WhatsApp d'un cousin du frère du voisin</div>
-    </div>
-
-    <div class="alert">
-      <h3>🔥 Dernière minute</h3>
-      <p>César aurait été aperçu hier soir devant la salle de muscu de Bondy. Le regard dur. Le survêt' propre. <strong>La revanche est en marche.</strong></p>
+    <div class="morale">
+      <h2>💡 La morale du 06</h2>
+      <p>Quand y'a un drame, deux options :</p>
+      <p>Être <strong>Sharko des Moulins</strong> et régler le truc en 4 minutes.</p>
+      <p>Être <strong>Maël</strong>, observer depuis Marrakech, et décider ce qui mérite de devenir une légende.</p>
+      <p><strong>Pas être Simon.</strong> JAMAIS être Simon.</p>
     </div>
   </section>
 
 </div>
 
 <footer>
-  Le larsa du siècle · officiellement inscrit au patrimoine immatériel du quartier<br>
-  Aucun César n'a été blessé physiquement, juste l'ego
+  Simon a changé de numéro · Lila ne sait toujours pas qui il est · Le 06 ne lâche rien
 </footer>
 
 </body>
