@@ -1,0 +1,15 @@
+{
+  "name": "affaire-cesar",
+  "version": "1.0.0",
+  "description": "L'affaire César - le larsa du siècle",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

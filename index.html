@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Affaire César — Le larsa du siècle</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a0a;
+    color: #f5f5f5;
+    line-height: 1.6;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 80px 20px 60px;
+    background: linear-gradient(180deg, #1a0000 0%, #0a0a0a 100%);
+    border-bottom: 1px solid #2a2a2a;
+  }
+  .hero .badge {
+    display: inline-block;
+    background: #e24b4a;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: 64px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff 0%, #999 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.1;
+  }
+  .hero .subtitle {
+    font-size: 22px;
+    color: #aaa;
+    margin-bottom: 32px;
+  }
+  .hero .tags {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .tag {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid #333;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #2a2a2a;
+    z-index: 100;
+    padding: 16px 0;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  nav a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: #e24b4a; }
+
+  /* SECTIONS */
+  section { padding: 60px 0; border-bottom: 1px solid #1a1a1a; }
+  h2 {
+    font-size: 36px;
+    margin-bottom: 24px;
+    color: #fff;
+  }
+  h2 .icon { color: #e24b4a; margin-right: 8px; }
+  h3 {
+    font-size: 22px;
+    margin-bottom: 16px;
+    color: #fff;
+  }
+  p { margin-bottom: 16px; color: #ccc; }
+  strong { color: #fff; font-weight: 600; }
+
+  /* CARDS */
+  .card {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+
+  /* STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .stat {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat .label { font-size: 13px; color: #888; margin-bottom: 8px; }
+  .stat .value { font-size: 32px; font-weight: 700; color: #fff; }
+  .stat.danger .value { color: #e24b4a; }
+
+  /* TIMELINE */
+  .timeline {
+    background: #0d0d0d;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 24px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+  }
+  .timeline-row {
+    display: flex;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .timeline-row:last-child { border-bottom: none; }
+  .timeline-time { color: #888; min-width: 80px; }
+  .timeline-event { color: #ddd; }
+  .timeline-event.chaos { color: #e24b4a; font-weight: 700; }
+
+  /* 014 GRID */
+  .grid-014 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .agent {
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid;
+  }
+  .agent .num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .agent .name {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .agent .desc {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .agent.purple { background: rgba(127,119,221,0.1); border-color: #534AB7; }
+  .agent.purple .name, .agent.purple .num { color: #AFA9EC; }
+  .agent.purple .desc { color: #CECBF6; }
+  .agent.coral { background: rgba(216,90,48,0.1); border-color: #D85A30; }
+  .agent.coral .name, .agent.coral .num { color: #F0997B; }
+  .agent.coral .desc { color: #F5C4B3; }
+  .agent.teal { background: rgba(29,158,117,0.1); border-color: #0F6E56; }
+  .agent.teal .name, .agent.teal .num { color: #5DCAA5; }
+  .agent.teal .desc { color: #9FE1CB; }
+  .agent.pink { background: rgba(212,83,126,0.1); border-color: #D4537E; }
+  .agent.pink .name, .agent.pink .num { color: #ED93B1; }
+  .agent.pink .desc { color: #F4C0D1; }
+  .agent.amber { background: rgba(186,117,23,0.1); border-color: #BA7517; }
+  .agent.amber .name, .agent.amber .num { color: #EF9F27; }
+  .agent.amber .desc { color: #FAC775; }
+  .agent.blue { background: rgba(55,138,221,0.1); border-color: #185FA5; }
+  .agent.blue .name, .agent.blue .num { color: #85B7EB; }
+  .agent.blue .desc { color: #B5D4F4; }
+  .agent.red { background: rgba(226,75,74,0.1); border-color: #A32D2D; }
+  .agent.red .name, .agent.red .num { color: #F09595; }
+  .agent.red .desc { color: #F7C1C1; }
+  .agent.mystery {
+    background: rgba(255,255,255,0.02);
+    border: 1px dashed #444;
+    color: #888;
+  }
+  .agent.mystery .name, .agent.mystery .num { color: #aaa; }
+  .agent.mystery .desc { color: #888; }
+
+  /* QUOTES */
+  .quote {
+    border-left: 3px solid #534AB7;
+    padding: 8px 0 8px 16px;
+    margin-bottom: 16px;
+  }
+  .quote.coral { border-color: #D85A30; }
+  .quote.teal { border-color: #0F6E56; }
+  .quote.amber { border-color: #BA7517; }
+  .quote p { font-style: italic; margin-bottom: 6px; }
+  .quote .author { font-size: 13px; color: #888; }
+
+  /* ALERT */
+  .alert {
+    background: rgba(226,75,74,0.1);
+    border-left: 4px solid #A32D2D;
+    padding: 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 24px 0;
+  }
+  .alert h3 { color: #F09595; }
+  .alert p { color: #F7C1C1; }
+
+  /* COMMUNIQUE */
+  .communique {
+    background: rgba(226,75,74,0.05);
+    border: 1px solid #A32D2D;
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 24px 0;
+  }
+  .communique p {
+    font-style: italic;
+    font-size: 18px;
+    color: #F7C1C1;
+    margin-bottom: 12px;
+  }
+  .communique .source { font-size: 12px; color: #888; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: #555;
+    font-size: 12px;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 40px; }
+    .hero .subtitle { font-size: 18px; }
+    h2 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">⚠ Fait divers du siècle</div>
+  <h1>L'AFFAIRE CÉSAR</h1>
+  <p class="subtitle">César s'est fait larsa par SEPT 014 — récit exclusif</p>
+  <div class="tags">
+    <span class="tag">🔥 EXCLU</span>
+    <span class="tag">⚡ CHAUD</span>
+    <span class="tag">👁 47 TÉMOINS</span>
+    <span class="tag">🥷 SEPT 014</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <ul>
+    <li><a href="#faits">Les faits</a></li>
+    <li><a href="#stats">Stats</a></li>
+    <li><a href="#video">La vidéo</a></li>
+    <li><a href="#agents">Les 014</a></li>
+    <li><a href="#reconstitution">Reconstitution</a></li>
+    <li><a href="#temoins">Témoignages</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <!-- LES FAITS -->
+  <section id="faits">
+    <h2><span class="icon">📰</span>Les faits</h2>
+    <div class="card">
+      <p>Mardi soir, sur le parking du Carrefour. <strong>César</strong>, la légende du quartier, celui qui a jamais perdu un 1v1 depuis 2019, sortait tranquille de chez le coiffeur fresh.</p>
+      <p>C'est là qu'une <strong>014</strong> a débarqué de nulle part. Personne s'y attendait. César non plus.</p>
+      <p style="color: #888; font-style: italic;">Mais on était loin de la vérité...</p>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <h2><span class="icon">📊</span>Les chiffres du larsa</h2>
+    <div class="stats-grid">
+      <div class="stat"><div class="label">Témoins</div><div class="value">47</div></div>
+      <div class="stat"><div class="label">Snaps postés</div><div class="value">312</div></div>
+      <div class="stat"><div class="label">Niveau de hess</div><div class="value">9.8/10</div></div>
+      <div class="stat danger"><div class="label">Réputation</div><div class="value">RIP</div></div>
+      <div class="stat"><div class="label">014 confirmées</div><div class="value">7</div></div>
+      <div class="stat"><div class="label">Durée du larsa</div><div class="value">11s</div></div>
+      <div class="stat danger"><div class="label">Chances de César</div><div class="value">0%</div></div>
+      <div class="stat"><div class="label">Vues TikTok</div><div class="value">2,4M</div></div>
+    </div>
+  </section>
+
+  <!-- LA VIDEO -->
+  <section id="video">
+    <h2><span class="icon">🎥</span>La vidéo qui change tout</h2>
+    <div class="card">
+      <p>Mardi matin, un gosse de 11 ans qui jouait à Fortnite sur sa fenêtre a posté une vidéo sur TikTok. <strong>2,4 millions de vues en 4 heures.</strong></p>
+      <p>Sur les images, on voit clairement <strong>SEPT 014 différentes</strong> qui sortent de partout : de derrière la benne, du toit de la pharmacie, d'un scooter, et même UNE qui descendait d'un arbre.</p>
+      <div class="quote">
+        <p>"Au début j'ai cru que c'était un mode Battle Royale en vrai. J'ai compté sept 014. Je sais compter monsieur."</p>
+        <div class="author">— Le gosse, interview à BFM</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LES 014 -->
+  <section id="agents">
+    <h2><span class="icon">🥷</span>Les 7 014 identifiées</h2>
+    <div class="grid-014">
+      <div class="agent purple">
+        <div class="num">014 #1</div>
+        <div class="name">La classique</div>
+        <div class="desc">Capuche, démarche tranquille. Celle qu'on a vue en premier.</div>
+      </div>
+      <div class="agent coral">
+        <div class="num">014 #2</div>
+        <div class="name">Celle de la benne</div>
+        <div class="desc">Aurait attendu 3 heures. Sentait pas bon mais déterminée.</div>
+      </div>
+      <div class="agent teal">
+        <div class="num">014 #3</div>
+        <div class="name">La sniper du toit</div>
+        <div class="desc">Sur la pharmacie. Personne sait comment elle est montée.</div>
+      </div>
+      <div class="agent pink">
+        <div class="num">014 #4</div>
+        <div class="name">La scootariste</div>
+        <div class="desc">TMAX sans plaque. Casque tinté. Pure intimidation.</div>
+      </div>
+      <div class="agent amber">
+        <div class="num">014 #5</div>
+        <div class="name">Tarzan</div>
+        <div class="desc">Descendue d'un arbre. Personne ne comprend. C'est validé.</div>
+      </div>
+      <div class="agent blue">
+        <div class="num">014 #6</div>
+        <div class="name">La taupe</div>
+        <div class="desc">Déguisée en livreur Uber Eats. Sac thermique vide.</div>
+      </div>
+      <div class="agent red">
+        <div class="num">014 #7</div>
+        <div class="name">LA PATRONNE</div>
+        <div class="desc">Bras croisés. N'a rien fait. Mais c'est elle qui dirige tout.</div>
+      </div>
+      <div class="agent mystery">
+        <div class="num">014 #?</div>
+        <div class="name">L'invisible ?</div>
+        <div class="desc">Certains parlent d'une 8ème. Rien de confirmé. Le mythe grandit.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECONSTITUTION -->
+  <section id="reconstitution">
+    <h2><span class="icon">🗺️</span>Reconstitution de l'embuscade</h2>
+    <p>César sort du coiffeur à 19h42. Il pose un pied, puis l'autre. <strong>C'est là que ça part en couilles.</strong></p>
+    <div class="timeline">
+      <div class="timeline-row"><div class="timeline-time">19:42:00</div><div class="timeline-event">César sort. Dégradé impeccable.</div></div>
+      <div class="timeline-row"><div class="timeline-time">19:42:03</div><div class="timeline-event">014 #1 apparaît en face. Classique.</div></div>
+      <div class="timeline-row"><div class="timeline-time">19:42:04</div><div class="timeline-event">César sourit. Il pense gérer.</div></div>
+      <div class="timeline-row"><div class="timeline-time">19:42:05</div><div class="timeline-event">014 #2 sort de la benne. César fronce.</div></div>
+      <div class="timeline-row"><div class="timeline-time">19:42:06</div><div class="timeline-event">014 #3 vise depuis le toit.</div></div>
+      <div class="timeline-row"><div class="timeline-time">19:42:07</div><div class="timeline-event">TMAX qui débarque (014 #4).</div></div>
+      <div class="timeline-row"><div class="timeline-time">19:42:08</div><div class="timeline-event chaos">014 #5 saute de l'arbre. CHAOS.</div></div>
+      <div class="timeline-row"><div class="timeline-time">19:42:09</div><div class="timeline-event">Le faux Uber Eats (014 #6) sort un truc.</div></div>
+      <div class="timeline-row"><div class="timeline-time">19:42:10</div><div class="timeline-event">La 014 #7 fait juste UN signe de la tête.</div></div>
+      <div class="timeline-row"><div class="timeline-time">19:42:11</div><div class="timeline-event chaos">LARSA INITIATED.</div></div>
+    </div>
+  </section>
+
+  <!-- TEMOIGNAGES -->
+  <section id="temoins">
+    <h2><span class="icon">🎤</span>Témoignages du quartier</h2>
+    <div class="card">
+      <div class="quote">
+        <p>"Frérot j'ai cru à un film. César il a rien vu venir, la 014 lui a fait un truc de fou. Wallah j'en dors plus."</p>
+        <div class="author">— Karim, témoin oculaire</div>
+      </div>
+      <div class="quote coral">
+        <p>"Moi je filmais avec mon iPhone 6, t'as vu la qualité, mais ça se voit que c'est larsa de niveau international."</p>
+        <div class="author">— Mehdi, vidéaste amateur</div>
+      </div>
+      <div class="quote teal">
+        <p>"César c'est mon cousin. Je veux pas en parler. (il pleure)"</p>
+        <div class="author">— Anonyme, famille proche</div>
+      </div>
+      <div class="quote">
+        <p>"Wallah au début j'ai compté 3 014. Après j'ai recompté, y'en avait 5. À la fin j'en voyais partout. Y'en avait peut-être 20 frérot."</p>
+        <div class="author">— Bilal, témoin (qui s'y connaît)</div>
+      </div>
+      <div class="quote teal">
+        <p>"Moi je vendais des chichas. J'ai tout vu. Les 014 elles étaient SYNCHRO. Comme un ballet. C'est de l'art."</p>
+        <div class="author">— Sofiane, commerçant</div>
+      </div>
+      <div class="quote amber">
+        <p>"J'avais dit en 2021 qu'un jour une coalition de 014 se formerait. Personne m'a cru. Aujourd'hui qui rigole."</p>
+        <div class="author">— Tonton Mamadou (il l'avait dit)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNIQUE -->
+  <section>
+    <h2><span class="icon">📡</span>Communiqué officiel des 014</h2>
+    <div class="communique">
+      <p>"On était pas 7. On était une idée. On peut être 100 demain. Le quartier le sait maintenant."</p>
+      <div class="source">— Publié sur le statut WhatsApp d'un cousin du frère du voisin</div>
+    </div>
+
+    <div class="alert">
+      <h3>🔥 Dernière minute</h3>
+      <p>César aurait été aperçu hier soir devant la salle de muscu de Bondy. Le regard dur. Le survêt' propre. <strong>La revanche est en marche.</strong></p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Le larsa du siècle · officiellement inscrit au patrimoine immatériel du quartier<br>
+  Aucun César n'a été blessé physiquement, juste l'ego
+</footer>
+
+</body>
+</html>
