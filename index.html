@@ -3,550 +3,564 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L'Affaire Simon — Le faux héros du 06</title>
+<title>VALENTIN — La Légende du Micro-Paff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bebas+Neue&family=Permanent+Marker&family=DM+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #0a0a0a;
-    color: #f5f5f5;
-    line-height: 1.6;
+  :root {
+    --bg: #0d0d0d;
+    --card: #161616;
+    --red: #ff2b2b;
+    --yellow: #ffd700;
+    --grey: #888;
+    --light: #f0ece0;
+    --border: #2a2a2a;
   }
-  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--light);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  #progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 4px; width: 0%;
+    background: linear-gradient(90deg, var(--red), var(--yellow));
+    z-index: 1000;
+    transition: width 0.1s;
+  }
 
   /* HERO */
   .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 80px 20px 60px;
-    background: linear-gradient(180deg, #1a0f00 0%, #0a0a0a 100%);
-    border-bottom: 1px solid #2a2a2a;
+    padding: 4rem 1.5rem 3rem;
+    position: relative;
+    background: radial-gradient(ellipse at 50% 60%, #2a0000 0%, #0d0d0d 65%);
+    overflow: hidden;
   }
-  .hero .badge {
-    display: inline-block;
-    background: #BA7517;
-    color: white;
-    padding: 6px 16px;
-    border-radius: 4px;
-    font-size: 12px;
-    letter-spacing: 2px;
-    font-weight: 600;
-    margin-bottom: 24px;
-    text-transform: uppercase;
+  .hero-tape {
+    background: var(--red);
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.4em;
+    padding: 0.4rem 1.5rem;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(255,43,43,0.4);
   }
   .hero h1 {
-    font-size: 64px;
-    font-weight: 800;
-    margin-bottom: 16px;
-    background: linear-gradient(135deg, #fff 0%, #999 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 1.1;
+    font-family: 'Black Ops One', sans-serif;
+    font-size: clamp(3.5rem, 16vw, 10rem);
+    line-height: 0.85;
+    text-transform: uppercase;
+    color: var(--light);
+    text-shadow: 0 0 80px rgba(255,43,43,0.5), 6px 6px 0 var(--red);
+    margin-bottom: 0.3em;
   }
-  .hero .subtitle {
-    font-size: 22px;
-    color: #aaa;
-    margin-bottom: 32px;
-  }
-  .hero .tags {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .tag {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid #333;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-  }
-
-  /* NAV */
-  nav {
-    position: sticky;
-    top: 0;
-    background: rgba(10,10,10,0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #2a2a2a;
-    z-index: 100;
-    padding: 16px 0;
-  }
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 24px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  nav a { color: #aaa; text-decoration: none; font-size: 14px; transition: color 0.2s; }
-  nav a:hover { color: #BA7517; }
-
-  /* SECTIONS */
-  section { padding: 50px 0; }
-  h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #fff;
-  }
-  h2 .icon { color: #BA7517; margin-right: 8px; }
-  p { margin-bottom: 14px; color: #ccc; }
-  strong { color: #fff; font-weight: 600; }
-  em { color: #ddd; }
-
-  /* CARDS */
-  .card {
-    background: #141414;
-    border: 1px solid #2a2a2a;
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 20px;
-  }
-  .card.danger { border: 2px solid #A32D2D; }
-  .card.amber {
-    background: linear-gradient(135deg, rgba(186,117,23,0.08), rgba(186,117,23,0.02));
-    border: 1px solid #BA7517;
-  }
-  .card.mael {
-    background: linear-gradient(135deg, rgba(127,119,221,0.15), rgba(127,119,221,0.03));
-    border: 1.5px solid #534AB7;
-    padding: 28px;
-  }
-  .card.mael h2 { color: #AFA9EC; }
-  .card.mael p { color: #d4d0f5; }
-  .card.mael strong { color: #fff; }
-
-  /* QUOTE BOXES */
-  .quote-box {
-    background: rgba(186,117,23,0.1);
-    border-left: 3px solid #BA7517;
-    border-radius: 0 8px 8px 0;
-    padding: 16px;
-    margin: 16px 0;
-    font-style: italic;
-    color: #f5e6c8;
-  }
-  .quote-box .sub {
-    font-size: 13px;
-    color: #BA7517;
-    margin-top: 8px;
+  .hero h1 span {
     display: block;
+    color: var(--red);
+    font-size: 0.3em;
+    letter-spacing: 0.12em;
+    text-shadow: none;
   }
-
-  .alert {
-    background: rgba(226,75,74,0.12);
-    border-left: 4px solid #A32D2D;
-    padding: 18px;
-    border-radius: 0 8px 8px 0;
-    margin: 18px 0;
-  }
-  .alert .label {
-    font-size: 11px;
-    color: #F09595;
-    letter-spacing: 2px;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  .alert p { color: #f7c1c1; margin-bottom: 6px; }
-  .alert .note {
-    font-size: 13px;
-    color: #F09595;
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--grey);
     font-style: italic;
-    margin-top: 6px;
-  }
-
-  /* PROBLEM LIST */
-  .problem-list {
-    background: rgba(226,75,74,0.1);
-    border: 1.5px solid #A32D2D;
-    border-radius: 12px;
-    padding: 20px;
-    margin: 20px 0;
-  }
-  .problem-list .title {
-    font-size: 11px;
-    color: #F09595;
-    letter-spacing: 2px;
-    font-weight: 600;
-    margin-bottom: 14px;
-  }
-  .problem-list ol {
-    padding-left: 24px;
-    color: #f7c1c1;
-  }
-  .problem-list li {
-    padding: 6px 0;
+    max-width: 36ch;
+    margin-top: 1.5rem;
     line-height: 1.6;
   }
+  .scroll-cta {
+    margin-top: 3rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    color: var(--yellow);
+    animation: bob 1.8s ease-in-out infinite;
+  }
+  @keyframes bob { 0%,100%{transform:translateY(0);} 50%{transform:translateY(12px);} }
+  .hero-glow {
+    position: absolute;
+    bottom: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(255,43,43,0.15), transparent 70%);
+    pointer-events: none;
+  }
 
-  /* CARD MAEL DETAILS */
-  .mael-stats {
-    background: rgba(255,255,255,0.05);
-    border-radius: 8px;
-    padding: 14px;
-    margin-top: 16px;
-  }
-  .mael-stats .label {
-    font-size: 11px;
-    color: #AFA9EC;
-    letter-spacing: 1px;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  .mael-stats p { color: #d4d0f5; line-height: 1.8; margin: 0; font-size: 14px; }
-
-  /* TWIST SECTION */
-  .twist {
-    background: linear-gradient(135deg, rgba(226,75,74,0.15), rgba(186,117,23,0.1));
-    border: 1.5px solid #A32D2D;
-    border-radius: 12px;
-    padding: 28px;
-    margin: 24px 0;
-  }
-  .twist .title-mini {
+  /* PHOTO SECTION */
+  .photo-section {
+    padding: 5rem 1.5rem;
     text-align: center;
-    font-size: 12px;
-    color: #F09595;
-    letter-spacing: 4px;
-    font-weight: 600;
-    margin-bottom: 8px;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
   }
-  .twist h2 {
-    text-align: center;
+  .photo-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.6rem, 5vw, 2.8rem);
+    letter-spacing: 0.08em;
+    color: var(--yellow);
+    margin-bottom: 0.5rem;
+  }
+  .photo-section > p { color: var(--grey); font-size: 0.95rem; margin-bottom: 2rem; }
+  .photo-wrapper { position: relative; display: inline-block; }
+  .photo-placeholder {
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 3px dashed var(--red);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: rgba(255,43,43,0.05);
+    margin: 0 auto;
+  }
+  .photo-placeholder:hover { background: rgba(255,43,43,0.12); border-color: var(--yellow); }
+  .photo-placeholder .icon { font-size: 3rem; margin-bottom: 0.5rem; }
+  .photo-placeholder .hint { font-size: 0.8rem; color: var(--grey); }
+  #file-input { display: none; }
+  #valentin-photo {
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--red);
+    box-shadow: 0 0 0 8px rgba(255,43,43,0.15), 0 20px 60px rgba(0,0,0,0.6);
+    cursor: pointer;
+    display: none;
+  }
+  .shame-badge {
+    position: absolute;
+    top: -8px; right: -8px;
+    background: var(--red);
     color: #fff;
-    margin-bottom: 24px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(255,43,43,0.5);
+    transform: rotate(12deg);
+    display: none;
   }
-  .twist p { color: #f7c1c1; }
-  .tour {
-    background: rgba(255,255,255,0.04);
-    border-radius: 8px;
-    padding: 16px;
-    margin: 18px 0;
+
+  /* CHAPTERS */
+  .chapter {
+    padding: 6rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
   }
-  .tour .label {
-    font-size: 12px;
-    color: #F09595;
-    letter-spacing: 1px;
-    font-weight: 600;
-    margin-bottom: 10px;
+  .chapter:nth-child(even) { background: var(--card); }
+  .chapter .inner {
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
   }
-  .tour p {
-    line-height: 1.9;
-    margin: 0;
-    color: #f7c1c1;
+  .chapter.visible .inner { opacity: 1; transform: translateY(0); }
+  .ch-number {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: clamp(4rem, 15vw, 9rem);
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(255,43,43,0.3);
+    line-height: 0.8;
+    margin-bottom: -0.15em;
+    user-select: none;
   }
-  .twist-foot {
-    text-align: center;
-    color: #F09595;
+  .ch-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.8rem, 6vw, 3.2rem);
+    letter-spacing: 0.06em;
+    color: var(--yellow);
+    margin-bottom: 1.5rem;
+    line-height: 1;
+  }
+  .ch-body { font-size: 1.12rem; line-height: 1.75; color: #d0ccc0; }
+  .ch-body p { margin-bottom: 1rem; }
+  em.name { color: var(--red); font-style: normal; font-weight: 700; }
+  .quote {
+    margin: 1.4rem 0;
+    padding: 1.1rem 1.3rem;
+    background: rgba(255,43,43,0.08);
+    border-left: 5px solid var(--red);
+    border-radius: 0 10px 10px 0;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.05rem;
+    color: var(--light);
+    line-height: 1.5;
+  }
+  .quote .author {
+    display: block;
+    margin-top: 0.6rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--grey);
     font-style: italic;
-    font-size: 15px;
-    margin-top: 14px;
   }
 
-  /* MAP GRID */
-  .map-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 8px;
-    margin: 20px 0;
+  /* PAFF SIZE */
+  .paff-scene {
+    margin: 2.5rem 0;
+    display: flex;
+    gap: 4rem;
+    align-items: flex-end;
+    justify-content: center;
+    flex-wrap: wrap;
   }
-  .city {
-    background: rgba(226,75,74,0.1);
-    border: 1px solid #A32D2D;
+  .paff-item { text-align: center; }
+  .paff-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--grey); margin-bottom: 0.8rem; }
+  .paff-body { background: linear-gradient(180deg, #e8dfc4, #c4b896); border-radius: 50px; margin: 0 auto; box-shadow: 0 6px 20px rgba(0,0,0,0.5); }
+  .paff-tip { background: #8b4513; border-radius: 50px 50px 0 0; margin: 0 auto; height: 8px; }
+  .paff-big { width: 20px; height: 120px; }
+  .paff-micro { width: 8px; height: 8px; border-radius: 50%; }
+  .paff-item .emoji { font-size: 1.5rem; margin-top: 0.5rem; }
+
+  .reactions {
+    display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 1.5rem 0;
+  }
+  .reaction {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.88rem;
+    color: var(--grey);
+    cursor: default;
+    transition: all 0.2s;
+  }
+  .reaction:hover { background: rgba(255,43,43,0.1); border-color: var(--red); color: var(--light); }
+
+  /* COUNTER */
+  .counter-section {
+    padding: 5rem 1.5rem;
+    text-align: center;
+    background: #100000;
+    border-top: 1px solid var(--red);
+    border-bottom: 1px solid var(--red);
+  }
+  .counter-label { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.4em; color: var(--grey); margin-bottom: 1rem; }
+  .counter-num { font-family: 'Black Ops One', sans-serif; font-size: clamp(3rem, 12vw, 7rem); color: var(--red); text-shadow: 0 0 40px rgba(255,43,43,0.6); line-height: 1; }
+  .counter-sub { font-size: 0.9rem; color: var(--grey); margin-top: 0.8rem; font-style: italic; }
+
+  /* FINALE */
+  .finale {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5rem 1.5rem;
+    background: radial-gradient(ellipse at center, #1a0000 0%, #0d0d0d 70%);
+    position: relative;
+    overflow: hidden;
+  }
+  .finale::before {
+    content: 'R.I.P.';
+    position: absolute;
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 25vw;
+    color: rgba(255,43,43,0.04);
+    user-select: none;
+    pointer-events: none;
+  }
+  .finale h2 {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: clamp(2rem, 9vw, 5.5rem);
+    text-transform: uppercase;
+    line-height: 0.9;
+    color: var(--light);
+    text-shadow: 5px 5px 0 var(--red);
+    margin-bottom: 1.5rem;
+  }
+  .finale > p { max-width: 38ch; color: var(--grey); font-size: 1.1rem; font-style: italic; line-height: 1.6; margin-bottom: 2rem; }
+  .epitaph {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.3rem;
+    color: var(--yellow);
+    padding: 1.5rem 2rem;
+    border: 2px solid rgba(255,215,0,0.3);
     border-radius: 8px;
-    padding: 12px;
+    background: rgba(255,215,0,0.05);
+    max-width: 400px;
+    line-height: 1.6;
+    margin: 0 auto 2.5rem;
   }
-  .city .name { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 4px; }
-  .city .pct { font-size: 11px; color: #F09595; }
-  .city.monaco {
-    background: rgba(186,117,23,0.1);
-    border-color: #BA7517;
+  .restart-btn {
+    background: transparent;
+    color: var(--red);
+    border: 2px solid var(--red);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    padding: 0.9rem 2.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
   }
-  .city.monaco .pct { color: #EF9F27; }
+  .restart-btn:hover { background: var(--red); color: #fff; box-shadow: 0 8px 30px rgba(255,43,43,0.4); transform: translateY(-2px); }
 
-  /* TESTIMONIALS */
-  .testimonial {
-    border-left: 3px solid #534AB7;
-    padding: 8px 0 8px 16px;
-    margin-bottom: 16px;
-  }
-  .testimonial.coral { border-color: #D85A30; }
-  .testimonial.teal { border-color: #0F6E56; }
-  .testimonial p { font-style: italic; margin-bottom: 6px; color: #ddd; }
-  .testimonial .author { font-size: 13px; color: #888; }
-
-  /* STATS */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    margin: 20px 0;
-  }
-  .stat {
-    background: #141414;
-    border: 1px solid #2a2a2a;
-    border-radius: 12px;
-    padding: 16px;
-    text-align: center;
-  }
-  .stat .label { font-size: 12px; color: #888; margin-bottom: 6px; }
-  .stat .value { font-size: 26px; font-weight: 700; color: #fff; }
-
-  /* MORALE */
-  .morale {
-    background: rgba(127,119,221,0.1);
-    border-left: 4px solid #534AB7;
-    padding: 24px;
-    border-radius: 0 12px 12px 0;
-    margin: 24px 0;
-  }
-  .morale h2 { color: #AFA9EC; margin-bottom: 12px; }
-  .morale p { color: #d4d0f5; line-height: 1.7; }
-
-  /* FOOTER */
-  footer {
-    text-align: center;
-    padding: 40px 20px;
-    color: #555;
-    font-size: 12px;
-    border-top: 1px solid #1a1a1a;
-  }
-
-  @media (max-width: 600px) {
-    .hero h1 { font-size: 40px; }
-    .hero .subtitle { font-size: 18px; }
-    h2 { font-size: 22px; }
-  }
+  footer { text-align: center; padding: 2rem 1rem; font-size: 0.78rem; color: #444; border-top: 1px solid var(--border); }
 </style>
 </head>
 <body>
 
+<div id="progress"></div>
+
 <!-- HERO -->
-<div class="hero">
-  <div class="badge">⚠ Saga du 06</div>
-  <h1>L'AFFAIRE SIMON</h1>
-  <p class="subtitle">Le faux héros qui a calmé personne</p>
-  <div class="tags">
-    <span class="tag">📡 EN BOUCLE</span>
-    <span class="tag">👑 MAËL CONFIRMÉ</span>
-    <span class="tag">🦸 FAUX HÉROS</span>
+<header class="hero">
+  <div class="hero-tape">⚠️ DOSSIER CLASSIFIÉ — DIFFUSION AUTORISÉE À TOUT LE MONDE</div>
+  <h1>Valentin<span>l'homme au micro-paff</span></h1>
+  <p class="hero-sub">L'histoire d'un mec qui avait un paff. Un tout petit paff. Et suffisamment d'amis pour qu'il ne l'oublie jamais.</p>
+  <div class="scroll-cta">↓ SCROLLE POUR SA HONTE ↓</div>
+  <div class="hero-glow"></div>
+</header>
+
+<!-- PHOTO SECTION -->
+<section class="photo-section">
+  <h2>🎯 Le Principal Intéressé</h2>
+  <p>Quelqu'un a chopé sa photo. Elle tourne partout. Trop tard Valentin.</p>
+  <div class="photo-wrapper" id="photo-wrapper">
+    <div class="photo-placeholder" id="placeholder" onclick="document.getElementById('file-input').click()" style="display:none;">
+      <div class="icon">📸</div>
+      <div style="font-size:0.9rem;color:#ccc;margin-bottom:0.3rem;">Charge la photo de Valentin ici</div>
+      <div class="hint">Clique ou glisse une image</div>
+    </div>
+    <img id="valentin-photo" src="data:image/png;base64,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" alt="Valentin" onclick="document.getElementById('file-input').click()" style="display:block;"/>
+    <span class="shame-badge" id="shame-badge" style="display:block;">😂 C'EST LUI</span>
   </div>
+  <input type="file" id="file-input" accept="image/*">
+  <p style="margin-top:1.2rem;font-size:0.8rem;color:#555;">← Mets sa tête ici pour le résultat optimal</p>
+</section>
+
+<!-- CH 01 -->
+<section class="chapter">
+  <div class="inner">
+    <div class="ch-number">01</div>
+    <div class="ch-title">Quelqu'un a pris le paff de Valentin</div>
+    <div class="ch-body">
+      <p>Tout a commencé simplement. <em class="name">Valentin</em> avait son paff. Son truc à lui. Et quelqu'un l'a pris.</p>
+      <p>Et là, au moment où tout le monde a vu le paff en question... le silence. Ce genre de silence qui dure deux secondes et qui détruit une réputation pour dix ans.</p>
+      <div class="quote">
+        "Attends... c'est ça ton paff ?"
+        <span class="author">— Sofiane, en plissant les yeux comme si ça allait agrandir l'image.</span>
+      </div>
+      <p>C'était un micro-paff. Un paff de rien. Un paff qu'on pouvait perdre entre deux doigts. Un paff qui avait manifestement raté quelque chose dans sa vie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CH 02 -->
+<section class="chapter">
+  <div class="inner">
+    <div class="ch-number">02</div>
+    <div class="ch-title">La Taille Du Problème</div>
+    <div class="ch-body">
+      <p>Pour être juste envers <em class="name">Valentin</em>, voici une comparaison objective et sans pitié de la situation :</p>
+      <div class="paff-scene">
+        <div class="paff-item">
+          <div class="paff-label">Un paff normal</div>
+          <div>
+            <div class="paff-tip" style="width:20px;"></div>
+            <div class="paff-body paff-big"></div>
+          </div>
+          <div class="emoji">😌</div>
+        </div>
+        <div class="paff-item">
+          <div class="paff-label">Le paff de Valentin</div>
+          <div style="height:136px;display:flex;align-items:flex-end;justify-content:center;">
+            <div class="paff-body paff-micro"></div>
+          </div>
+          <div class="emoji">🔬</div>
+        </div>
+      </div>
+      <div class="quote">
+        "Valentin t'as un micro-paff. Je dis pas ça pour te blesser. Je dis ça parce que c'est la réalité et que tout le monde le voit."
+        <span class="author">— Kevin, avec une franchise qu'on ne lui demandait pas.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTER -->
+<div class="counter-section">
+  <div class="counter-label">Nombre de fois où "micro-paff" a été dit ce jour-là</div>
+  <div class="counter-num" id="counter">0</div>
+  <div class="counter-sub">et c'est une estimation basse</div>
 </div>
 
-<!-- NAV -->
-<nav>
-  <ul>
-    <li><a href="#acte1">Acte 1</a></li>
-    <li><a href="#acte2">Acte 2</a></li>
-    <li><a href="#mael">Maël</a></li>
-    <li><a href="#acte3">Acte 3</a></li>
-    <li><a href="#acte4">Acte 4 · La vidéo</a></li>
-    <li><a href="#twist">Le twist</a></li>
-  </ul>
-</nav>
-
-<div class="container">
-
-  <!-- ACTE 1 -->
-  <section id="acte1">
-    <h2><span class="icon">📖</span>Acte 1 — L'insulte de Lila</h2>
-    <div class="card">
-      <p>Tout commence un mardi. Lila balance une vanne sur le père de <strong>Sharko</strong>. Elle pensait que ça allait passer.</p>
-      <p style="font-style: italic; color: #888;">Le quartier retient son souffle. On ne parle PAS du père de Sharko. C'est dans la constitution non-écrite du 06.</p>
-    </div>
-  </section>
-
-  <!-- ACTE 2 -->
-  <section id="acte2">
-    <h2><span class="icon">🔥</span>Acte 2 — Sharko des Moulins entre en scène</h2>
-    <div class="card">
-      <p><strong>Sharko, fierté des Moulins</strong>, apprend l'info en 4 minutes. Il pose son verre. Il met sa veste. Il sort.</p>
-      <p>Il met un coup de pression à Lila. Pas violent, pas brutal — juste <strong>le regard.</strong> Le regard qui fait que tu commences à réviser ta vie depuis la maternelle.</p>
-      <p>L'affaire est <strong>CLOSE</strong>. En 4 minutes. Net. Tout le quartier passe à autre chose.</p>
-    </div>
-  </section>
-
-  <!-- INTERMÈDE MAËL -->
-  <section id="mael">
-    <div class="card mael">
-      <h2>👑 Intermède — Maël, le roi sans royaume</h2>
-      <p>Pendant que toute cette histoire se déroule, <strong>Maël</strong> sirote un thé à la menthe sur une terrasse à <strong>Marrakech</strong>. Il ne savait rien. Il ne saura jamais.</p>
-      <p>Maël n'a pas besoin d'être informé. Maël <strong>EST</strong> l'information. Sa simple existence calme les tempêtes.</p>
-      <p style="font-style: italic;">Au moment exact où Sharko règle l'affaire, Maël aurait souri sans raison à un chat. Coïncidence ? Personne ne le pense.</p>
-
-      <div class="mael-stats">
-        <div class="label">📜 CARTE DU SAGE</div>
-        <p>
-          <strong>Nom :</strong> Maël<br>
-          <strong>Titre :</strong> Le sage de Marrakech<br>
-          <strong>Implication directe :</strong> Aucune<br>
-          <strong>Influence spirituelle :</strong> Totale<br>
-          <strong>Statut :</strong> Au-dessus de tout
-        </p>
+<!-- CH 03 -->
+<section class="chapter">
+  <div class="inner">
+    <div class="ch-number">03</div>
+    <div class="ch-title">Le Défilé De Vannes</div>
+    <div class="ch-body">
+      <p>Une fois que la porte est ouverte, personne ne la referme. Chacun y est allé de sa contribution. C'était organisé, méthodique, et totalement impitoyable.</p>
+      <div class="quote">"Valentin ton paff il a un paff encore plus petit que lui."<span class="author">— Momo</span></div>
+      <div class="quote">"T'as le plus petit paff que j'ai vu de ma vie. Et j'ai vu des paff de mouche."<span class="author">— Sofiane</span></div>
+      <div class="quote">"Valentin même les autres petits paff ont la honte pour toi."<span class="author">— Kevin</span></div>
+      <div class="quote">"Bro ton paff il se sent seul tellement il est micro."<span class="author">— Yasmine</span></div>
+      <div class="quote">"On peut parler d'autre chose parce que là il y a littéralement rien à voir."<span class="author">— Lucas. La pire vanne étant celle qui minimise.</span></div>
+      <div class="reactions">
+        <div class="reaction">😂 94</div>
+        <div class="reaction">💀 61</div>
+        <div class="reaction">🤏 88</div>
+        <div class="reaction">🔬 47</div>
+        <div class="reaction">🪦 33</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ACTE 3 -->
-  <section id="acte3">
-    <h2><span class="icon">🦸</span>Acte 3 — Simon enfile sa cape</h2>
-    <div class="card">
-      <p>L'affaire est terminée depuis 47 minutes. Sharko mange un sandwich. Maël contemple un coucher de soleil. Lila est passée à autre chose.</p>
-      <p>C'est là que <strong>Simon</strong> se lève. Il prend une grande inspiration. Il regarde le ciel. <strong>Il a une mission.</strong></p>
-
-      <div class="quote-box">
-        "Les gars... je vais arranger ça. Je vais faire une vidéo d'excuses à Sharko et à Maël. <strong style="color: #fff;">À la place de Lila.</strong> Pour calmer les choses. Quelqu'un doit le faire. Ce sera moi."
+<!-- CH 04 -->
+<section class="chapter">
+  <div class="inner">
+    <div class="ch-number">04</div>
+    <div class="ch-title">La Défense De Valentin (R.I.P.)</div>
+    <div class="ch-body">
+      <p><em class="name">Valentin</em> tente de se défendre. Il essaie. On lui accorde ça, il essaie vraiment.</p>
+      <div class="quote">
+        "C'est pas une question de taille c'est une question de qualité."
+        <span class="author">— Valentin, qui venait de signer son arrêt de mort.</span>
       </div>
-
-      <div class="problem-list">
-        <div class="title">⚠ PROBLÈMES (par ordre d'apparition)</div>
-        <ol>
-          <li>Personne lui a demandé d'arranger quoi que ce soit.</li>
-          <li>L'affaire est <strong>déjà arrangée</strong> depuis 47 minutes.</li>
-          <li>Sharko sait pas qui est Simon.</li>
-          <li>Maël sait pas qui est Simon.</li>
-          <li><strong>Lila sait pas qui est Simon.</strong> Quand on lui a montré sa photo elle a dit : "<em>c'est le frère de qui lui ?</em>"</li>
-          <li>Simon parle "à la place de Lila" comme s'ils étaient potes. Ils se sont jamais adressé la parole.</li>
-        </ol>
+      <p>La pièce explose. <em class="name">Kevin</em> est par terre. <em class="name">Sofiane</em> sort pour reprendre sa respiration. Même le téléphone de <em class="name">Yasmine</em> tombe.</p>
+      <div class="quote">
+        "LA QUALITÉ. Il a dit LA QUALITÉ. Son paff est invisible à l'œil nu et il parle de qualité. T'es un artiste toi."
+        <span class="author">— Momo, en répétant pour que tout le monde entende bien.</span>
       </div>
-
-      <p>Mais Simon, lui, se voit déjà <strong>en ambassadeur de paix du 06</strong>. Il imagine déjà Sharko qui lui serre la main. Maël qui lui dit "merci frère". Le quartier qui scande son nom. <strong>Il prend son téléphone.</strong></p>
+      <p><em class="name">Valentin</em> tente encore : « Vous comprenez rien. » Troisième vague de fous rires. À chaque mot qu'il dit, ça empire. Le groupe commence à lui conseiller de se taire pour son propre bien.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ACTE 4 -->
-  <section id="acte4">
-    <h2><span class="icon">🎥</span>Acte 4 — La vidéo</h2>
-    <div class="card danger">
-      <p>Simon rentre chez lui. Il habite encore avec sa mère. Sa chambre, c'est la même depuis qu'il a 9 ans. Y'a toujours le poster de Cristiano Ronaldo au mur. Mal scotché.</p>
-
-      <p>Il prend la ring light de sa petite sœur sans demander. Elle a 11 ans. Elle l'utilise pour ses tutos slime. Elle saura plus tard que son frère l'a empruntée pour faire LA vidéo. <strong>Elle changera de nom de famille à 18 ans.</strong></p>
-
-      <p>Il met sa capuche. Pas par style — pour cacher qu'il a encore son acné <strong>à 22 ans</strong>. Il s'entraîne devant le miroir. Il prend sa voix grave. Celle qu'il utilise jamais. Celle qui sonne fake immédiatement.</p>
-
-      <p>Il appuie sur enregistrer.</p>
-
-      <div class="alert">
-        <div class="label">💬 MINUTE 1 — L'OUVERTURE</div>
-        <p style="font-style: italic;">"Sharko... Maël... mes frères... aujourd'hui je prends mes responsabilités. Lila n'a pas le courage de le faire, alors je vais le faire pour elle."</p>
-        <p class="note">(Lila est en train d'acheter un boba à Antibes. Elle pense à rien.)</p>
-        <p class="note">(Sharko est dans sa cuisine. Il fait des oeufs.)</p>
+<!-- CH 05 -->
+<section class="chapter">
+  <div class="inner">
+    <div class="ch-number">05</div>
+    <div class="ch-title">La Photo Qui A Tout Scellé</div>
+    <div class="ch-body">
+      <p>Quelqu'un a sorti son téléphone. Quelqu'un a photographié <em class="name">Valentin</em> avec son micro-paff bien visible. La photo a été envoyée dans le groupe.</p>
+      <p>Puis transférée dans un autre groupe. Puis dans un autre. Puis dans un groupe que <em class="name">Valentin</em> ne connaissait même pas.</p>
+      <div class="quote">
+        "Valentin ta photo tourne dans des groupes que t'as jamais rejoints. Des gens que t'as jamais rencontrés savent que t'as un micro-paff."
+        <span class="author">— Kevin, le lendemain matin, avec un café.</span>
       </div>
+      <p>La légende de la photo : <strong style="color:var(--yellow);">"Valentin et son micro-paff. Prière pour lui."</strong></p>
+      <p>200 réponses. Aucune en sa faveur.</p>
+    </div>
+  </div>
+</section>
 
-      <p>À <strong>la minute 2</strong>, Simon dit "<em>en tant que représentant de la jeunesse du 06</em>". <strong>Personne l'a élu. Aucun mandat. Aucune légitimité.</strong></p>
-
-      <p>À <strong>la minute 4</strong>, Simon pleure. Une vraie larme. Sa mère toque à la porte : "Simon t'es là ? J'ai fait des coquillettes." Il fait semblant qu'il dort. <strong>Il a 22 ans.</strong></p>
-
-      <p>À <strong>la minute 6</strong>, il dit "<em>Sharko, Maël, je sais qu'on a eu nos différends</em>". <strong>Ils se connaissent pas. Y'a JAMAIS eu de différend. Y'a jamais eu de RIEN.</strong></p>
-
-      <p>À <strong>la minute 8</strong>, il fait le geste de la main sur le cœur. Il dit "<em>par respect pour vos pères</em>". Pluriel. <strong>Il connaît même pas le sien.</strong> Personne a vu son père depuis 2014.</p>
-
-      <div class="alert">
-        <div class="label">💣 MINUTE 9'14 — IL DIT LE MOT</div>
-        <p>En voulant "s'excuser à la place de Lila", il prononce <strong>"le père de Sharko"</strong>. Dans une vidéo. Filmée. Avec la date. Et l'heure.</p>
-        <p class="note">Le seul mec qui pensait calmer l'affaire vient de la rallumer tout seul, depuis sa chambre, avec la ring light de sa petite sœur.</p>
+<!-- CH 06 -->
+<section class="chapter">
+  <div class="inner">
+    <div class="ch-number">06</div>
+    <div class="ch-title">Le Surnom Est Éternel</div>
+    <div class="ch-body">
+      <p>Depuis ce jour, <em class="name">Valentin</em> n'est plus <em class="name">Valentin</em>. Dans tous les messages, dans toutes les conversations, son nom a changé pour toujours.</p>
+      <div style="text-align:center;margin:2.5rem 0;">
+        <div style="font-family:'Black Ops One',sans-serif;font-size:clamp(2rem,8vw,5rem);color:var(--red);text-shadow:4px 4px 0 #700;line-height:1.1;">
+          MICRO-PAFF
+        </div>
+        <div style="font-size:0.85rem;color:var(--grey);margin-top:0.6rem;font-style:italic;">Officiel. Irrévocable. Permanent.</div>
       </div>
-
-      <p>À <strong>la minute 11</strong>, il propose un "<em>sommet de réconciliation entre les quartiers</em>". <strong>Il vit dans un pavillon avec piscine et un labrador qui s'appelle Plume.</strong></p>
-
-      <p>À <strong>la minute 13</strong>, il regarde la cam dans les yeux. Il dit : "<em>Sharko, Maël... la paix soit avec vous. Et Lila... je te pardonne au nom du quartier.</em>"</p>
-
-      <p style="font-style: italic; color: #888; font-size: 14px;">Important : aucun quartier ne l'a chargé de pardonner qui que ce soit. Ce mandat n'existe pas. Il vient de l'inventer.</p>
-
-      <p>Il termine en disant : "<em>merci de m'avoir fait confiance pour gérer ça. Je rends à Sharko, Maël et Lila leur dignité.</em>" <strong>Personne lui a fait confiance. Personne avait perdu sa dignité. Sauf lui. Là. En direct.</strong></p>
-
-      <p>Il va manger ses coquillettes. Sa mère lui demande s'il a passé une bonne journée. Il répond <strong>"j'ai sauvé le 06 maman"</strong>. Sa mère sourit en hochant la tête. Elle sait pas. Personne sait encore. <strong>Mais ça arrive.</strong></p>
+      <div class="quote">"Micro-Paff t'arrives à quelle heure ?"<span class="author">— Le groupe, à chaque soirée depuis.</span></div>
+      <div class="quote">"Micro-Paff t'amènes quoi ?" — "Dis pas un paff." — "..."<span class="author">— Conversation type, en boucle.</span></div>
+      <div class="quote">"J'ai changé son prénom dans mon téléphone. Pour respecter la réalité."<span class="author">— Sofiane. Il avait mis 🤏 à la place du nom.</span></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- TWIST -->
-  <section id="twist">
-    <div class="twist">
-      <div class="title-mini">— LE TWIST —</div>
-      <h2>Maël et Sharko ont fait tourner la vidéo</h2>
-      <p>Sharko reçoit la vidéo le lendemain. Il regarde 30 secondes. Il sourit. Il l'envoie à Maël.</p>
-      <p>Maël regarde depuis Marrakech. Il rigole pendant 11 minutes d'affilée. <strong>Il décide que cette vidéo doit être vue.</strong> Par TOUT le monde.</p>
-
-      <div class="tour">
-        <div class="label">🗺️ LA TOURNÉE DE LA VIDÉO</div>
-        <p>
-          <strong>Étape 1 :</strong> Sharko l'envoie aux Moulins entiers<br>
-          <strong>Étape 2 :</strong> Maël la balance dans le groupe famille<br>
-          <strong>Étape 3 :</strong> Les Moulins l'envoient à Antibes<br>
-          <strong>Étape 4 :</strong> Antibes l'envoie à Cannes<br>
-          <strong>Étape 5 :</strong> Cannes l'envoie à Nice<br>
-          <strong>Étape 6 :</strong> Nice l'envoie à Menton<br>
-          <strong>Étape 7 :</strong> Menton l'envoie même à Monaco<br>
-          <strong>Étape 8 :</strong> Grasse la reçoit en boucle pendant 3 jours
-        </p>
-      </div>
-
-      <p class="twist-foot">Le département entier a vu Simon pleurer dans sa chambre.</p>
-    </div>
-  </section>
-
-  <!-- CARTE 06 -->
-  <section>
-    <h2><span class="icon">📍</span>Carte du 06 — Propagation</h2>
-    <div class="map-grid">
-      <div class="city"><div class="name">Les Moulins</div><div class="pct">Origine · 100%</div></div>
-      <div class="city"><div class="name">Antibes</div><div class="pct">Vu · 98%</div></div>
-      <div class="city"><div class="name">Cannes</div><div class="pct">Vu · 97%</div></div>
-      <div class="city"><div class="name">Nice</div><div class="pct">Vu · 96%</div></div>
-      <div class="city"><div class="name">Vence</div><div class="pct">Vu · 91%</div></div>
-      <div class="city"><div class="name">Menton</div><div class="pct">Vu · 89%</div></div>
-      <div class="city"><div class="name">Grasse</div><div class="pct">Vu · 94%</div></div>
-      <div class="city monaco"><div class="name">Monaco</div><div class="pct">Vu · 73% (les riches)</div></div>
-    </div>
-  </section>
-
-  <!-- TEMOIGNAGES -->
-  <section>
-    <h2><span class="icon">🎤</span>Témoignages du 06</h2>
-    <div class="card">
-      <div class="testimonial coral">
-        <p>"Wallah à Antibes même les vieux la regardaient. Ma grand-mère elle l'a montrée à son médecin."</p>
-        <div class="author">— Yanis, 22 ans, Antibes</div>
-      </div>
-      <div class="testimonial">
-        <p>"À Nice on a fait une projection au parc. 200 personnes. On a ri pendant 14 minutes. C'était sacré."</p>
-        <div class="author">— Sami, organisateur de la projection</div>
-      </div>
-      <div class="testimonial teal">
-        <p>"Même à Monaco on l'a vue. Y'a un mec qui l'a montrée dans un yacht. Le 06 c'est uni."</p>
-        <div class="author">— Source anonyme, Port Hercule</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STATS -->
-  <section>
-    <h2><span class="icon">📊</span>Statistiques officielles</h2>
-    <div class="stats-grid">
-      <div class="stat"><div class="label">Habitants du 06</div><div class="value">1,1M</div></div>
-      <div class="stat"><div class="label">Ont vu la vidéo</div><div class="value">1,1M</div></div>
-      <div class="stat"><div class="label">Mandat de Simon</div><div class="value">aucun</div></div>
-      <div class="stat"><div class="label">Lila pense à Simon</div><div class="value">jamais</div></div>
-      <div class="stat"><div class="label">Cote Maël</div><div class="value">+400%</div></div>
-      <div class="stat"><div class="label">Cote Sharko</div><div class="value">+350%</div></div>
-    </div>
-  </section>
-
-  <!-- MORALE -->
-  <section>
-    <div class="morale">
-      <h2>💡 La morale du 06</h2>
-      <p>Quand y'a un drame, deux options :</p>
-      <p>Être <strong>Sharko des Moulins</strong> et régler le truc en 4 minutes.</p>
-      <p>Être <strong>Maël</strong>, observer depuis Marrakech, et décider ce qui mérite de devenir une légende.</p>
-      <p><strong>Pas être Simon.</strong> JAMAIS être Simon.</p>
-    </div>
-  </section>
-
-</div>
+<!-- FINALE -->
+<section class="finale">
+  <h2>La honte de Valentin<br>est éternelle.</h2>
+  <p>Le paff était petit. Le surnom est immense. Cette histoire sera racontée dans 20 ans à ses enfants, par des gens qu'il ne connaît pas encore.</p>
+  <div class="epitaph">
+    Ci-gît la réputation de Valentin<br>
+    Victime de son propre micro-paff<br>
+    Il savait. Il a rien dit.<br>
+    <span style="font-size:0.85rem;color:#aaa;">Pour toujours 🤏</span>
+  </div>
+  <button class="restart-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ RELIRE SA HONTE</button>
+</section>
 
 <footer>
-  Simon a changé de numéro · Lila ne sait toujours pas qui il est · Le 06 ne lâche rien
+  Valentin a été prévenu que ce site existait. Il a répondu "lol". On a tous vu que c'était pas un vrai lol. 🪦
 </footer>
 
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+  });
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.chapter').forEach(c => obs.observe(c));
+
+  // Counter animation
+  let counted = false;
+  const counterEl = document.getElementById('counter');
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !counted) {
+        counted = true;
+        const target = 63, dur = 1400, start = performance.now();
+        const animate = now => {
+          const p = Math.min((now - start) / dur, 1);
+          counterEl.textContent = Math.round((1 - Math.pow(1 - p, 3)) * target);
+          if (p < 1) requestAnimationFrame(animate);
+        };
+        requestAnimationFrame(animate);
+      }
+    });
+  }, { threshold: 0.5 }).observe(document.querySelector('.counter-section'));
+
+  // Photo upload
+  function loadPhoto(file) {
+    if (!file || !file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const photo = document.getElementById('valentin-photo');
+      photo.src = ev.target.result;
+      photo.style.display = 'block';
+      document.getElementById('placeholder').style.display = 'none';
+      document.getElementById('shame-badge').style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+  document.getElementById('file-input').addEventListener('change', e => loadPhoto(e.target.files[0]));
+  const wrapper = document.getElementById('photo-wrapper');
+  wrapper.addEventListener('dragover', e => e.preventDefault());
+  wrapper.addEventListener('drop', e => { e.preventDefault(); loadPhoto(e.dataTransfer.files[0]); });
+</script>
 </body>
 </html>
